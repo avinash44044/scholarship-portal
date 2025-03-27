@@ -299,8 +299,8 @@ const StudentDetails = () => {
           </Modal.Footer>
         </Modal>
       </Container>
-    </>///
+    </>
   );
 };
-
+///
 export default StudentDetails;
