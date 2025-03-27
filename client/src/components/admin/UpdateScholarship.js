@@ -73,7 +73,7 @@ const UpdateScholarship = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put(`http://localhost:8080/get-scholarships/${id}`, {
+      const res = await axios.put(`http://localhost:8081/get-scholarships/${id}`, {
         scholarshipName,
         deadline,
         category,

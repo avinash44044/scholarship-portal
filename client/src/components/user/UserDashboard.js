@@ -13,7 +13,7 @@ const UserDashboard = () => {
   const getScholarships = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:8080/get-user-applications/${userEmail}`
+        `http://localhost:8081/get-user-applications/${userEmail}`
       );
       setScholarship(data.application);
     } catch (error) {
@@ -33,7 +33,7 @@ const UserDashboard = () => {
   const handleDelete = async() => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:8080/get-applications/${scholarship[selected]?._id}`
+        `http://localhost:8081/get-applications/${scholarship[selected]?._id}`
       );
       alert(data.message);
       navigate("/user-dashboard");

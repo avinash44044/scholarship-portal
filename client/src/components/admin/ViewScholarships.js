@@ -12,7 +12,7 @@ const ViewScholarships = () => {
   const getScholarships = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:8080/get-scholarships`
+        `http://localhost:8081/get-scholarships`
       );
       setScholarship(data.scholarship);
     } catch (error) {
@@ -33,7 +33,7 @@ const ViewScholarships = () => {
   const handleDelete = async() => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:8080/get-scholarships/${scholarship[selected]?._id}`
+        `http://localhost:8081/get-scholarships/${scholarship[selected]?._id}`
       );
       alert(data.message);
       navigate("/adminDashboard");

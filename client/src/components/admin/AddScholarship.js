@@ -54,7 +54,7 @@ const AddScholarship = () => {
     e.preventDefault();
     try {
       if(adminLoggedIn){
-      const res = await axios.post(`http://localhost:8080/createscholarships`, {
+      const res = await axios.post(`http://localhost:8081/createscholarships`, {
         scholarshipName,
         deadline,
         category,

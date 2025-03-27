@@ -23,7 +23,7 @@ const InternatinalBased = () => {
     const getScholarships = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:8080/get-scholarships/${"international"}`
+          `http://localhost:8081/get-scholarships/${"international"}`
         );
         setScholarship(data.scholarship);
         

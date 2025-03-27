@@ -23,10 +23,10 @@ const MeritBased = () => {
     const getScholarships = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:8080/get-scholarships/${"merit-based"}`
+          `http://localhost:8081/get-scholarships/${"merit-based"}`
         );
         setScholarship(data.scholarship);
-        
+        console.log(data)
       } catch (error) {
         console.log(error);
         alert("Something went wrong");

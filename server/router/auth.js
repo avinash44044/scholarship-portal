@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const session = require("express-session");
-const db = add url here
+const db = 'mongodb://localhost:27017/scholarship'
+
 const User = require("../model/userSchemaa");
 
 const requireLogin = (req, res, next) => {
@@ -23,7 +24,7 @@ router.post("/register", async (req, res) => {
         .status(422)
         .send({ success: false, message: "Please fill all the input fields" });
     }
-
+//
     // check Existing user
     const userExist = await User.findOne({ email });
     if (userExist) {

@@ -75,7 +75,7 @@ const ApplicationForm = () => {
     try {
       // const id = params.id.toString();
       const { data } = await axios.get(
-        `http://localhost:8080/scholarship/${params.id}`
+        `http://localhost:8081/scholarship/${params.id}`
       );
       // setUserId(data.scholarship._id);
       setScholarshipName(data.scholarship.scholarshipName);
@@ -99,7 +99,7 @@ const ApplicationForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`http://localhost:8080/application-form`, {
+      const res = await axios.post(`http://localhost:8081/application-form`, {
         scholarshipName,
         category,
         amount,
@@ -585,7 +585,7 @@ const ApplicationForm = () => {
                     <Row>
                       <Col xs={12} sm={12} md={2}>
                         <label className="col-form-label">
-                          Name of College <span className="compulsory">*</span>
+                          Name of School/College <span className="compulsory">*</span>
                         </label>
                       </Col>
                       <Col xs={12} sm={12} md={10}>
@@ -649,7 +649,7 @@ const ApplicationForm = () => {
                     <Row>
                       <Col xs={12} sm={12} md={2}>
                         <label className="    col-form-label">
-                          Degree <span className="compulsory">*</span>
+                         Class/Degree <span className="compulsory">*</span>
                         </label>
                       </Col>
                       <Col xs={12} sm={12} md={3}>
@@ -662,7 +662,11 @@ const ApplicationForm = () => {
                               value={degree}
                               onChange={(e) => setDegree(e.target.value)}
                             >
-                              <option defaultValue="">Choose Degree </option>
+                              <option defaultValue="">Choose Class/Degree </option>
+                              <option value={"B.E."}>9th</option>
+                              <option value={"B.E."}>10th</option>
+                              <option value={"B.E."}>11th</option>
+                              <option value={"B.E."}>12th</option>
                               <option value={"B.E."}>B.E.</option>
                               <option value={"B.Tech"}>B.Tech</option>
                               <option value={"B.Sc"}>B.Sc</option>

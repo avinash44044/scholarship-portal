@@ -14,7 +14,7 @@ const Register = () => {
   const PostData = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`http://localhost:8080/register`, {
+      const res = await axios.post(`http://localhost:8081/register`, {
         name,
         email,
         password,

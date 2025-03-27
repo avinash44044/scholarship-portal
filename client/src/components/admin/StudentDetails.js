@@ -299,7 +299,7 @@ const StudentDetails = () => {
           </Modal.Footer>
         </Modal>
       </Container>
-    </>
+    </>///
   );
 };
 

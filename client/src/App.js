@@ -43,7 +43,7 @@ const App = () => {
   useEffect(() => {
     AOS.init();
   }, []);
-
+//
   return (
     <>
       <UserProvider>
@@ -72,7 +72,7 @@ const App = () => {
           <Route path="/international-based-scholarships" element={<InternatinalBased/>}/>
           <Route path="/research-based-scholarships" element={<ResearchBased/>}/>
           <Route path="/minority-based-scholarships" element={<MinorityBased/>}/>
-
+//
           {/* Admin Pages */}
           <Route path="/add-scholarship" element={<AddScholarship />}></Route>
           <Route path="/adminDashboard" element={<AdminDashboard />} />

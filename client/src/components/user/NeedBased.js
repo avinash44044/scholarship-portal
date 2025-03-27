@@ -23,7 +23,7 @@ const NeedBased = () => {
     const getScholarships = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:8080/get-scholarships/${"need-based"}`
+          `http://localhost:8081/get-scholarships/${"need-based"}`
         );
         setScholarship(data.scholarship);
         

@@ -17,17 +17,17 @@ const Contact = () => {
                     style={{ textDecoration: "none" }}
                   >
                     <i className="ri-mail-line" />
-                    <span>: support@website.com</span>
+                    <span>: vituniversity@.ac.in</span>
                   </a>
                 </li>
                 <li>
                   <a
-                    href="www.website.com"
+                    href="https://vit.ac.in"
                     className="contact-link"
                     style={{ textDecoration: "none" }}
                   >
                     <i className="ri-earth-line" />
-                    <span>: www.website.com</span>
+                    <span>: www.vit.ac.in</span>
                   </a>
                 </li>
                 <li>
@@ -37,7 +37,7 @@ const Contact = () => {
                     style={{ textDecoration: "none" }}
                   >
                     <i className="ri-phone-line" />
-                    <span>: (+001) 123 456 7890</span>
+                    <span>:+91234567890</span>
                   </a>
                 </li>
                 <li>
@@ -60,7 +60,7 @@ const Contact = () => {
                     style={{ textDecoration: "none" }}
                   >
                     <i className="ri-user-location-line" />
-                    <span>: 1644 Deer Ridge Drive Rochelle Park, NJ 07662</span>
+                    <span>:Vit University, Vellore 632014</span>
                   </a>
                 </li>
               </ul>

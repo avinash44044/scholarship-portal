@@ -23,7 +23,7 @@ const ViewUserScholarships = () => {
     const getScholarships = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:8080/get-scholarships`
+          `http://localhost:8081/get-scholarships`
         );
         setScholarship(data.scholarship);
         

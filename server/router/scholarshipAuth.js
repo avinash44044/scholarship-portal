@@ -3,9 +3,10 @@ const mongoose = require("mongoose");
 const router = express.Router();
 const session = require("express-session");
 // const {requireAdminLogin} = require("./adminAuth.js")
-const db = add url here
-const Scholarships = require("../model/scholarshipModel.js");
+const db = 'mongodb://localhost:27017/scholarship'
 
+const Scholarships = require("../model/scholarshipModel.js");
+//
 
 router.post("/createscholarships", async (req, res) => {
   try {
@@ -74,7 +75,8 @@ router.post("/createscholarships", async (req, res) => {
 // Get all scholarships
 router.get("/get-scholarships", async (req, res) => {
   try {
-    const scholarship = await Scholarships.find({}).limit(50).sort({ timestamp: "-1" });
+    const scholarship = await Scholarships.find().limit(50).sort({ timestamp: "-1" });
+    console.log(scholarship)
     res.status(200).send({
       success: true,
       message: "All Scholarships",
