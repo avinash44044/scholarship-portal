@@ -1,4 +1,4 @@
-import React, { useState ,useContext} from "react";
+import React, { useState, useContext } from "react";
 import { Modal, Button, Container, Row, Col, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -35,12 +35,14 @@ function MyVerticallyCenteredModal(props) {
 
 const AddScholarship = () => {
   const navigate = useNavigate();
-  const { loggedIn,
+  const {
+    loggedIn,
     setLoggedIn,
     user,
     setUser,
     adminLoggedIn,
-    setAdminLoggedIn, } = useContext(UserContext);
+    setAdminLoggedIn,
+  } = useContext(UserContext);
   const [modalShow, setModalShow] = React.useState(false);
   const [scholarshipName, setScholarshipName] = useState("");
   const [deadline, setDeadline] = useState("");
@@ -53,35 +55,38 @@ const AddScholarship = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if(adminLoggedIn){
-      const res = await axios.post(`http://localhost:8081/createscholarships`, {
-        scholarshipName,
-        deadline,
-        category,
-        amount,
-        eligibility,
-        documents,
-        description,
-      });
-      if (res && res.data.success) {
-        alert(res.data.message);
-        navigate("/adminDashboard");
-        // Reset the inputs to blank
-        e.target.reset();
-        setScholarshipName("");
-        setDeadline("");
-        setCategory("");
-        setAmount("");
-        setEligibility("");
-        setDocuments("");
-        setDescription("");
-        // refresh page after submit is done
-        window.location.reload();
+      if (adminLoggedIn) {
+        const res = await axios.post(
+          `http://localhost:8081/createscholarships`,
+          {
+            scholarshipName,
+            deadline,
+            category,
+            amount,
+            eligibility,
+            documents,
+            description,
+          }
+        );
+        if (res && res.data.success) {
+          alert(res.data.message);
+          navigate("/adminDashboard");
+          // Reset the inputs to blank
+          e.target.reset();
+          setScholarshipName("");
+          setDeadline("");
+          setCategory("");
+          setAmount("");
+          setEligibility("");
+          setDocuments("");
+          setDescription("");
+          // refresh page after submit is done
+          window.location.reload();
+        } else {
+          alert(res.data.message);
+        }
       } else {
-        alert(res.data.message);
-      }}
-      else{
-        console.log("Unautherized Access")
+        console.log("Unautherized Access");
       }
     } catch (error) {
       console.log(error);

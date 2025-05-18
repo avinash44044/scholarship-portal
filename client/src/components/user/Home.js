@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card , Row , Col } from 'react-bootstrap'
-import scholarshipImage from '../../../../client/src/images/scholarship.jpg'
+import scholarshipImage from '../../../../client/src/images/Scholarship.webp'
 
 const Home = () => {
   return (

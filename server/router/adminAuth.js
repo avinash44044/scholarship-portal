@@ -5,28 +5,29 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const Admin = require("../model/adminSchema");
 
-// ✅ Connect MongoDB (Ensure connection is in `server.js` if needed)
-mongoose.connect("mongodb://localhost:27017/scholarship", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => console.log("✅ MongoDB Connected"))
-  .catch(err => console.error("❌ MongoDB Connection Error:", err));
+// Connect to MongoDB
+mongoose
+  .connect("mongodb://localhost:27017/scholarship", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => console.error("MongoDB Connection Error:", err));
 
-// ✅ Remove `const app = express();` (Handled in `server.js`)
-
-// ✅ Fix Middleware Issue (Move to `server.js` where `app` is defined)
+// Middleware
 router.use(express.json());
 router.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
-// ✅ Fix Session Middleware (Move this to `server.js`)
-router.use(session({
-  secret: "mysecretkey",
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false } // Set to `true` if using HTTPS
-}));
+router.use(
+  session({
+    secret: "mysecretkey",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }, // should be true in production with HTTPS
+  })
+);
 
-// ✅ Middleware to check admin login
+// Authentication middleware
 const requireAdminLogin = (req, res, next) => {
   if (req.session.isAdminLoggedIn) {
     next();
@@ -34,29 +35,47 @@ const requireAdminLogin = (req, res, next) => {
     res.status(401).send({ success: false, message: "Unauthorized access" });
   }
 };
-///ankur
-// ✅ Admin Login API
+
+// Admin Login Route with Email Pattern Validation
 router.post("/adminlogin", async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    // Check for empty fields
     if (!email || !password) {
-      return res.status(400).send({ success: false, message: "Email & Password required" });
+      return res.status(400).send({
+        success: false,
+        message: "Email & Password required",
+      });
     }
 
-    // ✅ Find admin in MongoDB
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailPattern.test(email)) {
+      return res.status(400).send({
+        success: false,
+        message: "Invalid email format",
+      });
+    }
+
+    // Check if admin exists
     const admin = await Admin.findOne({ email });
 
     if (!admin) {
-      return res.status(404).send({ success: false, message: "Email not registered. Please Register." });
+      return res.status(404).send({
+        success: false,
+        message: "Email not registered. Please Register.",
+      });
     }
 
-    // ✅ Check password (without hashing)
+    // Password check (Note: You should use hashing like bcrypt in production)
     if (password !== admin.password) {
-      return res.status(401).send({ success: false, message: "Invalid Email or Password" });
+      return res.status(401).send({
+        success: false,
+        message: "Invalid Email or Password",
+      });
     }
 
-    // ✅ Fix session issue (Set session before response)
+    // Set session
     req.session.isAdminLoggedIn = true;
     req.session.admin = { email: admin.email };
 
@@ -65,15 +84,16 @@ router.post("/adminlogin", async (req, res) => {
       message: "Login Successful",
       user: { email: admin.email },
     });
-
   } catch (err) {
-    console.error("❌ Login Error:", err);
-    return res.status(500).send({ success: false, message: `Login Error: ${err.message}` });
+    console.error("Login Error:", err);
+    return res.status(500).send({
+      success: false,
+      message: `Login Error: ${err.message}`,
+    });
   }
 });
 
-// ✅ Check if admin is authenticated
-router.get('/admin-auth', requireAdminLogin, (req, res) => {
+ router.get("/admin-auth", requireAdminLogin, (req, res) => {
   res.status(200).send({ success: true });
 });
 

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const session = require("express-session");
-const db = 'mongodb://localhost:27017/scholarship'
+const db = "mongodb://localhost:27017/scholarship";
 
 const User = require("../model/userSchemaa");
 
@@ -24,8 +24,14 @@ router.post("/register", async (req, res) => {
         .status(422)
         .send({ success: false, message: "Please fill all the input fields" });
     }
-//
-    // check Existing user
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailPattern.test(email)) {
+      return res.status(400).send({
+        success: false,
+        message: "Invalid email format",
+      });
+    }
+
     const userExist = await User.findOne({ email });
     if (userExist) {
       return res
@@ -79,7 +85,13 @@ router.post("/login", async (req, res) => {
             .status(422)
             .send({ success: false, message: "Invalid Email or Password" });
         }
-
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailPattern.test(email)) {
+          return res.status(400).send({
+            success: false,
+            message: "Invalid email format",
+          });
+        }
         res.status(200).send({
           success: true,
           message: "Login Successful",

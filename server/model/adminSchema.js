@@ -1,20 +1,17 @@
-const mongoose = require('mongoose');
-// const validator = require('validator');
+const mongoose = require("mongoose");
 
 const adminSchema = new mongoose.Schema({
-    
-    email: {
-        type:String,
-        required : true,
-        unique : [true, "Email id already registered"],
-       
-    },
-    password: {
-        type:String,
-        required : true
-    }
-})
+  email: {
+    type: String,
+    required: true,
+    unique: [true, "Email id already registered"],
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+});
 
-const Admin = mongoose.model('admins', adminSchema);
+const Admin = mongoose.model("admins", adminSchema);
 
-module.exports = Admin ;
+module.exports = Admin;

@@ -6,11 +6,7 @@ import { UserContext } from "../../context/auth";
 import AdminRegistrationImage from "../../images/userRegistration.jpg";
 
 const AdminLogin = () => {
-  const {
-    setLoggedIn,
-    setAdminLoggedIn,
-    setUser,
-  } = useContext(UserContext);
+  const { setLoggedIn, setAdminLoggedIn, setUser } = useContext(UserContext);
 
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -19,11 +15,11 @@ const AdminLogin = () => {
   const PostData = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8081/adminlogin",
-        { email, password },  // ✅ Ensure correct data format
-        { withCredentials: true }  // ✅ Enable credentials mode
+      const res = await axios.post(
+        "http://localhost:8081/adminlogin",
+        { email, password }, // ✅ Ensure correct data format
+        { withCredentials: true } // ✅ Enable credentials mode
       );
-      
 
       if (res && res.data.success) {
         alert(res.data.message);
@@ -31,7 +27,6 @@ const AdminLogin = () => {
         setAdminLoggedIn(true);
         setUser({ email });
 
-        // ✅ Fix localStorage (Ensure user is stored as a string)
         localStorage.setItem("loggedIn", "false");
         localStorage.setItem("adminLoggedIn", "true");
         localStorage.setItem("user", JSON.stringify({ email }));
@@ -41,7 +36,10 @@ const AdminLogin = () => {
         alert(res.data.message);
       }
     } catch (error) {
-      console.error("❌ Login Error:", error.response?.data?.message || error.message);
+      console.error(
+        "❌ Login Error:",
+        error.response?.data?.message || error.message
+      );
       alert("Login failed. Please check credentials.");
     }
   };
@@ -50,7 +48,11 @@ const AdminLogin = () => {
     <Container>
       <Row>
         <Col>
-          <img src={AdminRegistrationImage} alt="Admin Login" style={{ width: "100%" }} />
+          <img
+            src={AdminRegistrationImage}
+            alt="Admin Login"
+            style={{ width: "100%" }}
+          />
         </Col>
         <Col>
           <Form onSubmit={PostData}>
