@@ -73,7 +73,7 @@ The Scholarship Portal will serve as a secure, user-friendly, and efficient plat
 Clone the repository
 
  
-git clone https://github.com/ankurmishra48/ScholarshipPortal.git
+git clone https://github.com/avinash44044/ScholarshipPortal.git
 Install dependencies
 Navigate to the backend folder and run: 
 npm install
